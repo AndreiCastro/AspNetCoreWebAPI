@@ -19,7 +19,6 @@ namespace SmartSchool.Models
             this.Sobrenome = sobrenome;
             this.Telefone = telefone;
         }
-
         
     }
 }
