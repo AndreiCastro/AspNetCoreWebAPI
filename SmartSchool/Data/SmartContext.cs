@@ -18,8 +18,13 @@ namespace SmartSchool.Data
         public DbSet<AlunoDisciplina> AlunoDisciplinas { get; set; }
         public DbSet<Professor> Professores { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Data Source=ANDREI\SQLEXPRESS; Initial Catalog=SmartSchollApp; Integrated Security=SSPI;");
+        }
+
         //Relação de N pra N
-        protected override void OnModeCreating(ModelBuilder builder)
+        protected void OnModeCreating(ModelBuilder builder)
         {
             //dizendo que o AlunoDisciplina tem id das tabelas Aluno e Disciplina (olhando a classe fica mais compreensível)
             builder.Entity<AlunoDisciplina>()

@@ -27,7 +27,7 @@ namespace SmartSchool
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SmartContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
+                context => context.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
             services.AddControllers();
         }
