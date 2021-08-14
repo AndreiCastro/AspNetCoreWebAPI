@@ -29,7 +29,18 @@ namespace SmartSchool
             services.AddDbContext<SmartContext>(
                 context => context.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
-            services.AddControllers();
+
+            /*services.AddSingleton<IRepository, Repository>(); Cria uma instancia d eum serviço quando é chamado a 1º vez, e reutiliza
+            essa msm instancias quando é chamando N vezes.*/
+
+            /*services.AddTransient<IRepository, Repository>(); É o caso contrario do Singleton, toda vez q é chamado cria um nova instancia*/
+
+            services.AddScoped<IRepository, Repository>();
+
+            services.AddControllers()
+                    .AddNewtonsoftJson(opt => 
+                                       opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            //Newtonsoft Serve pra desfazer o loop infinito do Json (Ele tem que add no nugetpack ou direto no SmartSchool.csproj
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
