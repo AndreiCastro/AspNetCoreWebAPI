@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace SmartSchool.Models
+namespace SmartSchool.Dto
 {
-    public class Aluno
+    public class AlunoRegistrarDto
     {
         public int Id { get; set; }
         public int Matricula { get; set; }
@@ -14,20 +16,5 @@ namespace SmartSchool.Models
         public DateTime DataIni { get; set; } = DateTime.Now;
         public DateTime? DataFim { get; set; } = null;
         public bool Ativo { get; set; } = true;
-        public IEnumerable<AlunoDisciplina> AlunosDisciplinas { get; set; }
-
-        public Aluno() {}
-
-        public Aluno(int id, int matricula, string nome, string sobrenome, string telefone, DateTime dataNasc)
-        {
-            Id = id;
-            Matricula = matricula;
-            Nome = nome;
-            Sobrenome = sobrenome;
-            DataNasc = dataNasc;
-            Telefone = telefone;
-
-        }
-        
     }
 }

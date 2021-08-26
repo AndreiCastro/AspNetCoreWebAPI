@@ -17,6 +17,8 @@ namespace SmartSchool.Data
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<AlunoDisciplina> AlunoDisciplinas { get; set; }
         public DbSet<Professor> Professores { get; set; }
+        public DbSet<AlunoCurso> AlunosCursos { get; set; }
+        public DbSet<Curso> Cursos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +31,9 @@ namespace SmartSchool.Data
             //dizendo que o AlunoDisciplina tem id das tabelas Aluno e Disciplina (olhando a classe fica mais compreensível)
             builder.Entity<AlunoDisciplina>()
                 .HasKey(AD => new { AD.AlunoId, AD.DisciplinaId });
+            
+            builder.Entity<AlunoCurso>()
+                .HasKey(AC => new { AC.AlunoId, AC.CursoId });
         }
     }
 
