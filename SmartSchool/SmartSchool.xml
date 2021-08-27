@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartSchool</name>
+    </assembly>
+    <members>
+        <member name="T:SmartSchool.Controllers.AlunoController">
+            <summary>
+            Controler Aluno 
+            </summary>
+        </member>
+        <member name="M:SmartSchool.Controllers.AlunoController.#ctor(SmartSchool.Data.IRepository,AutoMapper.IMapper)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="repo"></param>
+            <param name="mappper"></param>
+        </member>
+        <member name="M:SmartSchool.Controllers.AlunoController.Get">
+            <summary>
+            Metodo para retornar todos os alunos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.Controllers.AlunoController.GetRegister">
+            <summary>
+            Metodo para retornar todos os alunos (Será deletad)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.Controllers.AlunoController.Get(System.Int32)">
+            <summary>
+            Metodo para retornar Aluno por Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.Controllers.AlunoController.Post(SmartSchool.Dto.AlunoRegistrarDto)">
+            <summary>
+            Metodo para incluir aluno
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.Dto.AlunoDto">
+            <summary>
+            DTO da classe AlunoDTO
+            </summary>
+        </member>
+        <member name="P:SmartSchool.Dto.AlunoDto.Id">
+            <summary>
+            Id do Aluno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.Dto.AlunoDto.Matricula">
+            <summary>
+            Matricula do ALuno
+            </summary>
+        </member>
+        <member name="P:SmartSchool.Dto.AlunoDto.Nome">
+            <summary>
+            Nome do Aluno
+            </summary>
+        </member>
+    </members>
+</doc>

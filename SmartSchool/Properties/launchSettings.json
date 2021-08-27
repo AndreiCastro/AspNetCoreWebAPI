@@ -4,23 +4,23 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:23474",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:23474"
+      //"sslPort": 0
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "api/aluno",
+      //"launchBrowser": true,
+      //"launchUrl": "api/aluno", Foi comentando, pois agr ele não abre o browser sozinho e mudei a url, que esta configurada Startup.cs (swagger)
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "SmartSchool": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      //"launchBrowser": true,
+      //"launchUrl": "weatherforecast",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

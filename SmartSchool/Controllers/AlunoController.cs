@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace SmartSchool.Controllers
 {
+    /// <summary>
+    /// Controler Aluno 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AlunoController : ControllerBase
@@ -22,14 +25,21 @@ namespace SmartSchool.Controllers
         private readonly string alunoNullo = "Aluno não encontrado";
 
         public IRepository Repo { get; }
-
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <param name="mappper"></param>
         public AlunoController(IRepository repo, IMapper mappper)
         {
             _repo = repo;
             _mappper = mappper;
         }
           
-        //GET: api/<AlunoController>
+        /// <summary>
+        /// Metodo para retornar todos os alunos
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -39,14 +49,21 @@ namespace SmartSchool.Controllers
             return Ok(rtn);
         }
 
-        //GET: api/<AlunoController>
+        /// <summary>
+        /// Metodo para retornar todos os alunos (Será deletad)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("register")]
         public IActionResult GetRegister()
         {
             return Ok(new AlunoRegistrarDto());
         }
 
-        //GET: api/id
+        /// <summary>
+        /// Metodo para retornar Aluno por Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)
         {
@@ -57,7 +74,11 @@ namespace SmartSchool.Controllers
             return Ok(rtn);
         }
 
-        //POST: api/objeto
+        /// <summary>
+        /// Metodo para incluir aluno
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Post(AlunoRegistrarDto model)
         {
