@@ -7,7 +7,7 @@
         <member name="T:SmartSchool.Controllers.AlunoController">
             <summary>
             Controler Aluno 
-            </summary>
+            </summary>    
         </member>
         <member name="M:SmartSchool.Controllers.AlunoController.#ctor(SmartSchool.Data.IRepository,AutoMapper.IMapper)">
             <summary>
@@ -41,6 +41,11 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:SmartSchool.Controllers.ProfessorController">
+            <summary>
+            Controle Professor
+            </summary>
         </member>
         <member name="T:SmartSchool.Dto.AlunoDto">
             <summary>

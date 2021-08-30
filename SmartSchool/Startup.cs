@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace SmartSchool
 {
@@ -35,7 +36,7 @@ namespace SmartSchool
 
 
             services.AddControllers()
-                    .AddNewtonsoftJson(opt => 
+                    .AddNewtonsoftJson(opt =>
                                        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             //Newtonsoft Serve pra desfazer o loop infinito do Json (Ele tem que add no nugetpack ou direto no SmartSchool.csproj
 
@@ -50,16 +51,46 @@ namespace SmartSchool
             //Esse baico tambem é uma forma de injeção de dependencia com AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            })
+                .AddApiVersioning(options =>
+                {
+                    options.DefaultApiVersion = new ApiVersion(1, 0);
+                    options.AssumeDefaultVersionWhenUnspecified = true;
+                });
+
+            var apiProviderDesc = services.BuildServiceProvider().GetService<IApiVersionDescriptionProvider>();
+
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc(
-                    "smartschoolapi",
-                    new Microsoft.OpenApi.Models.OpenApiInfo()
-                    {
-                        Title = "SmartSchool API",
-                        Version = "1.0"
-                    });
-
+                foreach (var item in apiProviderDesc.ApiVersionDescriptions)
+                {
+                    options.SwaggerDoc(
+                        //"smartschoolapi",
+                        item.GroupName,
+                        new Microsoft.OpenApi.Models.OpenApiInfo()
+                        {
+                            Title = "SmartSchool API",
+                            //Version = "1.0",
+                            Version = item.ApiVersion.ToString(),
+                            TermsOfService = new Uri("http://SeusTermosDeUso.com"),
+                            Description = "The new description here",
+                            License = new Microsoft.OpenApi.Models.OpenApiLicense
+                            {
+                                Name = "SmartSchoo Licenses",
+                                Url = new Uri("http://mit.com")
+                            },
+                            Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                            {
+                                Name = "Andrei Santos de Castro",
+                                Email = "",
+                                Url = new Uri("http://qualquersite.com")
+                            }
+                        });
+                }
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
                 options.IncludeXmlComments(xmlCommentsFullPath);
@@ -69,7 +100,7 @@ namespace SmartSchool
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider apiVerDescProv)
         {
             if (env.IsDevelopment())
             {
@@ -88,7 +119,12 @@ namespace SmartSchool
             app.UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/smartschoolapi/swagger.json", "smartschoolapi");
+                    foreach (var item in apiVerDescProv.ApiVersionDescriptions)
+                    {
+                        //options.SwaggerEndpoint("/swagger/smartschoolapi/swagger.json", "smartschoolapi");
+                        options.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName);
+                    }
+                    
                     options.RoutePrefix = "";
                 });
             //Configurou o swagger para abri com essa url

@@ -15,9 +15,10 @@ namespace SmartSchool.Controllers
 {
     /// <summary>
     /// Controler Aluno 
-    /// </summary>
-    [Route("api/[controller]")]
+    /// </summary>    
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AlunoController : ControllerBase
     {
         private readonly IRepository _repo;

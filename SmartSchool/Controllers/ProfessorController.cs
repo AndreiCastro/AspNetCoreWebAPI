@@ -10,9 +10,13 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartSchool.Controllers
-{
-    [Route("api/[controller]")]
+{   
+    /// <summary>
+    /// Controle Professor
+    /// </summary>
     [ApiController]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiversion}/[controller]")]
     public class ProfessorController : ControllerBase
     {
         private readonly string professorNullo = "Professor não encontrado";
