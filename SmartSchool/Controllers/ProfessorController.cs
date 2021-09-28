@@ -31,9 +31,9 @@ namespace SmartSchool.Controllers
 
         //GET: api/<ProfessorController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var professor = _repo.GetAllProfessores(true);
+            var professor = await _repo.GetAllProfessores(true);
             var rtn = _mapper.Map<IEnumerable<ProfessorDto>>(professor);
 
             return Ok(rtn);
@@ -41,16 +41,16 @@ namespace SmartSchool.Controllers
 
         //GET: api/<ProfessorController>
         [HttpGet("register")]
-        public IActionResult GetRegister()
+        public async Task<IActionResult> GetRegister()
         {
             return Ok(new ProfessorRegistrarDto());
         }
 
         //GET: api/id
         [HttpGet("{id:int}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var professor = _repo.GetProfessorById(id);
+            var professor = await _repo.GetProfessorById(id);
             if (professor == null) return BadRequest(professorNullo);
             var rtn = _mapper.Map<ProfessorDto>(professor);
 
@@ -59,7 +59,7 @@ namespace SmartSchool.Controllers
 
         //POST api/objeto
         [HttpPost]
-        public IActionResult Post(ProfessorRegistrarDto model)
+        public async Task<IActionResult> Post(ProfessorRegistrarDto model)
         {
             var professor = _mapper.Map<Professor>(model);
 
@@ -71,9 +71,9 @@ namespace SmartSchool.Controllers
 
         //PUT api/objeto, id
         [HttpPut("{id:int}")]
-        public IActionResult Put(int id, ProfessorRegistrarDto model)
+        public async Task<IActionResult> Put(int id, ProfessorRegistrarDto model)
         {   
-            var rtnProfessor = _repo.GetProfessorById(id);
+            var rtnProfessor = await _repo.GetProfessorById(id);
             if (rtnProfessor == null) return BadRequest(professorNullo);
 
             var professor = _mapper.Map<Professor>(model);
@@ -85,9 +85,9 @@ namespace SmartSchool.Controllers
 
         //PATH api/obejto, id
         [HttpPatch("{id:int}")]
-        public IActionResult Path(int id, ProfessorRegistrarDto model)
+        public async Task<IActionResult> Path(int id, ProfessorRegistrarDto model)
         {
-            var teacher = _repo.GetProfessorById(id);
+            var teacher = await _repo.GetProfessorById(id);
             if (teacher == null) return BadRequest(professorNullo);
 
             var professor = _mapper.Map<Professor>(model);
@@ -99,9 +99,9 @@ namespace SmartSchool.Controllers
 
         //DELETE api/id
         [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var professor = _repo.GetProfessorById(id);
+            var professor = await _repo.GetProfessorById(id);
             if (professor == null) return BadRequest(professorNullo);
 
             _repo.Delete(professor);

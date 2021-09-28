@@ -13,13 +13,17 @@ namespace SmartSchool.Data
         void Delete<T>(T entity) where T : class;
         bool SaveChanges();
 
+        #region No Assincrona
         Aluno[] GetAllAlunos(bool includeProfessor = false);
-        Aluno[] GetAllAlunoByDisciplinaId(int idDisciplina, bool includeProfessor = false);
-        Aluno GetAlunoById(int idAluno, bool includeProfessor = false);
+        #endregion No Assincrona
 
-        Professor[] GetAllProfessores(bool includeAluno = false);
-        Professor[] GetAllProfessoreByDisciplinaId(int idDisciplina, bool includeAluno = false);
-        Professor GetProfessorById(int idProfessor, bool includeAluno = false);
+        Task<Aluno[]> GetAllAlunosAsync(bool includeProfessor = false);
+        Task<Aluno[]> GetAllAlunoByDisciplinaId(int idDisciplina, bool includeProfessor = false);
+        Task<Aluno> GetAlunoById(int idAluno, bool includeProfessor = false);
+
+        Task<Professor[]> GetAllProfessores(bool includeAluno = false);
+        Task<Professor[]> GetAllProfessoreByDisciplinaId(int idDisciplina, bool includeAluno = false);
+        Task<Professor> GetProfessorById(int idProfessor, bool includeAluno = false);
 
 
     }

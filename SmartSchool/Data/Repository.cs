@@ -36,6 +36,7 @@ namespace SmartSchool.Data
         }
 
         //Aluno
+        #region No Assicrona
         public Aluno[] GetAllAlunos(bool includeProfessor = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
@@ -51,8 +52,26 @@ namespace SmartSchool.Data
             query = query.AsNoTracking().OrderBy(x => x.Id);
             return query.ToArray();
         }
+        #endregion No Assicrona
 
-        public Aluno[] GetAllAlunoByDisciplinaId(int idDisciplina, bool includeProfessor = false)
+
+        public async Task<Aluno[]> GetAllAlunosAsync(bool includeProfessor = false)
+        {
+            IQueryable<Aluno> query = _context.Alunos;
+
+            if (includeProfessor)
+            {
+                query = query.Include(ad => ad.AlunosDisciplinas)
+                             .ThenInclude(d => d.Disciplina)
+                             .ThenInclude(p => p.Professor);
+            }
+
+            //AsNoTracking serve para liberar a sessão após consulta, para atualização
+            query = query.AsNoTracking().OrderBy(x => x.Id);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Aluno[]> GetAllAlunoByDisciplinaId(int idDisciplina, bool includeProfessor = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
 
@@ -65,10 +84,10 @@ namespace SmartSchool.Data
 
             query = query.AsNoTracking().OrderBy(x => x.Id)
                                         .Where(y => y.AlunosDisciplinas.Any(d => d.DisciplinaId == idDisciplina));
-            return query.ToArray();
+            return await query.ToArrayAsync();
         }
 
-        public Aluno GetAlunoById(int idAluno, bool includeProfessor = false)
+        public async Task<Aluno> GetAlunoById(int idAluno, bool includeProfessor = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
 
@@ -80,11 +99,11 @@ namespace SmartSchool.Data
             }
 
             query = query.AsNoTracking().Where(x => x.Id == idAluno);
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
 
         //Professor
-        public Professor[] GetAllProfessores(bool includeAluno = false)
+        public async Task<Professor[]> GetAllProfessores(bool includeAluno = false)
         {
             IQueryable<Professor> query = _context.Professores;
 
@@ -96,10 +115,10 @@ namespace SmartSchool.Data
             }
 
             query = query.AsNoTracking().OrderBy(x => x.Id);
-            return query.ToArray();
+            return await query.ToArrayAsync();
         }
 
-        public Professor[] GetAllProfessoreByDisciplinaId(int idDisciplina, bool includeAluno = false)
+        public async Task<Professor[]> GetAllProfessoreByDisciplinaId(int idDisciplina, bool includeAluno = false)
         {
             IQueryable<Professor> query = _context.Professores;
 
@@ -113,10 +132,10 @@ namespace SmartSchool.Data
             query = query.AsNoTracking().Where(x => x.Disciplinas.Any(y => y.AlunosDisciplinas
                                                                  .Any(z => z.DisciplinaId == idDisciplina)))
                                                                  .OrderBy(x => x.Id);
-            return query.ToArray();
+            return await query.ToArrayAsync();
         }
 
-        public Professor GetProfessorById(int idProfessor, bool includeAluno = false)
+        public async Task<Professor> GetProfessorById(int idProfessor, bool includeAluno = false)
         {
             IQueryable<Professor> query = _context.Professores;
 
@@ -128,7 +147,7 @@ namespace SmartSchool.Data
             }
 
             query = query.AsNoTracking().Where(x => x.Id == idProfessor);
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
     }
 }

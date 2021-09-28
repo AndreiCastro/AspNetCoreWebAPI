@@ -36,7 +36,8 @@ namespace SmartSchool.Controllers
             _repo = repo;
             _mappper = mappper;
         }
-          
+
+        #region Exemplo não Assincrona 
         /// <summary>
         /// Metodo para retornar todos os alunos
         /// </summary>
@@ -49,13 +50,27 @@ namespace SmartSchool.Controllers
 
             return Ok(rtn);
         }
+        #endregion Exemplo não Assincrona 
+
+        /// <summary>
+        /// Metodo para retornar todos os alunos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("getAsync")]
+        public async Task<IActionResult> GetAsync()
+        {
+            var aluno = await _repo.GetAllAlunosAsync(true);
+            var rtn = _mappper.Map<IEnumerable<AlunoDto>>(aluno); //Mapeou o Aluno p/ AlunoDto (reotrna uma lista por é um GetAll)
+
+            return Ok(rtn);
+        }
 
         /// <summary>
         /// Metodo para retornar todos os alunos (Será deletad)
         /// </summary>
         /// <returns></returns>
         [HttpGet("register")]
-        public IActionResult GetRegister()
+        public async Task<IActionResult> GetRegister()
         {
             return Ok(new AlunoRegistrarDto());
         }
@@ -66,9 +81,9 @@ namespace SmartSchool.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var aluno = _repo.GetAlunoById(id);
+            var aluno = await _repo.GetAlunoById(id);
             if (aluno == null) return BadRequest(alunoNullo);
 
             var rtn = _mappper.Map<AlunoDto>(aluno);
@@ -81,21 +96,21 @@ namespace SmartSchool.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(AlunoRegistrarDto model)
+        public async Task<IActionResult> Post(AlunoRegistrarDto model)
         {
             var aluno = _mappper.Map<Aluno>(model); //Transformando AlunoDto para Aluno, pois o _repo.Add so add Aluno
 
             _repo.Add(aluno);
-            if (_repo.SaveChanges()) return Created($"/api/aluno/{model.Id}", _mappper.Map<AlunoDto>(aluno)); //ao salvar ja bate na url get/aluno/id
+            if (await _repo.SaveChanges()) return Created($"/api/aluno/{model.Id}", _mappper.Map<AlunoDto>(aluno)); //ao salvar ja bate na url get/aluno/id
 
             return BadRequest(alunoNullo);
         }
 
         //PUT: api/objeto
         [HttpPut("{id:int}")]
-        public IActionResult Put(int id, AlunoRegistrarDto model)
+        public async Task<IActionResult> Put(int id, AlunoRegistrarDto model)
         {            
-            var aluno = _repo.GetAlunoById(id);
+            var aluno = await _repo.GetAlunoById(id);
             if (aluno == null) return BadRequest(alunoNullo);
 
             _mappper.Map(model, aluno);
@@ -108,9 +123,9 @@ namespace SmartSchool.Controllers
 
         //PATCH: api/objeto
         [HttpPatch("{id:int}")]
-        public IActionResult Patch(int id, AlunoRegistrarDto model)
+        public async Task<IActionResult> Patch(int id, AlunoRegistrarDto model)
         {
-            var aluno = _repo.GetAlunoById(id);
+            var aluno = await _repo.GetAlunoById(id);
             if (aluno == null) return BadRequest(alunoNullo);
 
             _mappper.Map(model, aluno);
@@ -123,9 +138,9 @@ namespace SmartSchool.Controllers
 
         //DELETE: api/id
         [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var aluno = _repo.GetAlunoById(id);
+            var aluno = await _repo.GetAlunoById(id);
             if (aluno == null) return BadRequest(alunoNullo);
 
             _repo.Delete(aluno);
