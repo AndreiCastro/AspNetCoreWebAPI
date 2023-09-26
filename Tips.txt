@@ -1,0 +1,4 @@
+WebAPI:
+
+* Sempre mudar o inicar do projeto de ISSExpress para ProjectName.WebApi. 
+* No arquvivo launchSettings muda o launchUrl para api, assim irá abrir como api e depois vc coloca o resto do caminho para testes. Verifique a roda das controllers se tem o api na frente

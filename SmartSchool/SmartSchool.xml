@@ -16,13 +16,13 @@
             <param name="repo"></param>
             <param name="mappper"></param>
         </member>
-        <member name="M:SmartSchool.Controllers.AlunoController.GetAsync">
+        <member name="M:SmartSchool.Controllers.AlunoController.Get">
             <summary>
             Metodo para retornar todos os alunos
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.Controllers.AlunoController.Get">
+        <member name="M:SmartSchool.Controllers.AlunoController.GetAsync">
             <summary>
             Metodo para retornar todos os alunos
             </summary>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\Desktop\\Studies\\Projetos\\SmartSchool\\SmartSchool\\SmartSchool.csproj": {}
+    "C:\\Users\\andrei\\source\\repos\\MyProjects\\AspNetCoreWebAPI\\SmartSchool\\SmartSchool.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\Desktop\\Studies\\Projetos\\SmartSchool\\SmartSchool\\SmartSchool.csproj": {
+    "C:\\Users\\andrei\\source\\repos\\MyProjects\\AspNetCoreWebAPI\\SmartSchool\\SmartSchool.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\Desktop\\Studies\\Projetos\\SmartSchool\\SmartSchool\\SmartSchool.csproj",
+        "projectUniqueName": "C:\\Users\\andrei\\source\\repos\\MyProjects\\AspNetCoreWebAPI\\SmartSchool\\SmartSchool.csproj",
         "projectName": "SmartSchool",
-        "projectPath": "C:\\Users\\andre\\Desktop\\Studies\\Projetos\\SmartSchool\\SmartSchool\\SmartSchool.csproj",
-        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\Desktop\\Studies\\Projetos\\SmartSchool\\SmartSchool\\obj\\",
+        "projectPath": "C:\\Users\\andrei\\source\\repos\\MyProjects\\AspNetCoreWebAPI\\SmartSchool\\SmartSchool.csproj",
+        "packagesPath": "C:\\Users\\andrei\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andrei\\source\\repos\\MyProjects\\AspNetCoreWebAPI\\SmartSchool\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,7 +83,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -95,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

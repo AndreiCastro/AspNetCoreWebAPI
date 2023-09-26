@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSchool.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SmartSchool.Data
 {
@@ -20,10 +16,11 @@ namespace SmartSchool.Data
         public DbSet<AlunoCurso> AlunosCursos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=ANDREI\SQLEXPRESS; Initial Catalog=SmartSchollApp; Integrated Security=SSPI;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseSqlServer(@"Data Source=ANDREI\SQLEXPRESS; Initial Catalog=SmartSchollApp; Integrated Security=SSPI;");
+        //    optionsBuilder.UseSqlServer(@"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=SmartSchollApp;Data Source=DESKTOP-5EUU7OI\SQLEXPRESS");
+        //}
 
         //Relação de N pra N
         protected void OnModeCreating(ModelBuilder builder)

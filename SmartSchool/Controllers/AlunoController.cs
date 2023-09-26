@@ -101,7 +101,7 @@ namespace SmartSchool.Controllers
             var aluno = _mappper.Map<Aluno>(model); //Transformando AlunoDto para Aluno, pois o _repo.Add so add Aluno
 
             _repo.Add(aluno);
-            if (await _repo.SaveChanges()) return Created($"/api/aluno/{model.Id}", _mappper.Map<AlunoDto>(aluno)); //ao salvar ja bate na url get/aluno/id
+            if (_repo.SaveChanges()) return Created($"/api/aluno/{model.Id}", _mappper.Map<AlunoDto>(aluno)); //ao salvar ja bate na url get/aluno/id
 
             return BadRequest(alunoNullo);
         }
