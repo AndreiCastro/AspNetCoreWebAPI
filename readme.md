@@ -1,5 +1,5 @@
 <h2>Projeto de estudo Web APi Rest</h2>
-
+<h4>* Arquivo Tips - Algumas explicações </h4> 
 <table>
   <tr>
     <td>Back-end</td>
@@ -12,4 +12,4 @@
     <td>Rest</td>
   </tr>
 </table>
-<h4>* Arquivo Tips - Algumas explicações </h4> 
+
